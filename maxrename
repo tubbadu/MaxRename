@@ -1,0 +1,26 @@
+#!/usr/bin/python3
+
+import glob
+import os
+import sys
+
+
+newnames = input("Inserire nuovo nome (il carattere # verra' sostituito da numeri crescenti): ")
+if "#" in newnames:
+	lista = list(sys.argv[1:])
+	c = 0
+	length = len(str(len(lista))) # numero di cifre da mettere
+	for el in lista:
+		c += 1
+		num = "0" * (length - len(str(c))) + str(c)
+		oldname = el.split("/")
+		oldname[-1] = newnames.replace("#", num)
+		newname = ""
+		for substr in oldname:
+			newname += substr + "/"
+		newname = newname[:-1]
+		print(el, "->", newname)
+		os.rename(el, newname)
+		
+else:
+	print("error: new name must include '#' char")
