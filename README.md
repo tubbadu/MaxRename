@@ -44,5 +44,8 @@ Insert new name (the '#' char will be replaced with crescent numbers):
 your_new_name#.your_extension
 ```
 
-
 and voilà!
+
+## TODO:
+
+* add ```maxrename -r```  to replace in each filename
