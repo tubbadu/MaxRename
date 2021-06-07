@@ -3,22 +3,43 @@ help = """
 MaxRename by Tubbadu
 
 usage:
+ maxrename -h
+ \tto show the list of possibile commands
  maxrename 'path/to/file1' 'path/to/file2' 'path/to/file3' ... 'path/to/fileN'
+ \tthan insert the new name (without the path!), including the # char, which will be replaced by increasing numbers, in the same order as they has been called in maxrename.
  
- than insert the new name (without the path!), including the # char, which will be replaced by increasing numbers, in the same order as they has been called in maxrename.
+ maxrename -r 'path/to/file1' 'path/to/file2' 'path/to/file3' ... 'path/to/fileN'
+ \tthan insert the string you wish to replace and the new string which will replace the first one
 """
 import glob
 import os
 import sys
 
 if(len(sys.argv) <= 1):
-	print("erroreeee")
-elif sys.argv[1] == '-h' or sys.argv[1] == '-help':
+	print("error: maxrename should take at least one argument.")
+	exit()
+elif sys.argv[1] == '-h' or sys.argv[1] == '-help' or sys.argv[1] == '--help':
 	print(help)
+	exit()
+elif sys.argv[1] == '-r' or sys.argv[1] == '-replace' or sys.argv[1] == '--replace':
+	# maxreplace
+	searchstring = input("Insert string to be replaced:\n")
+	replacestring = input(f"Insert string to replace '{searchstring}':\n")
+	lista = list(sys.argv[2:])
+	for el in lista:
+		oldname = el.split("/")
+		oldname[-1] = oldname[-1].replace(searchstring, replacestring)
+		newname = ""
+		for substr in oldname:
+			newname += substr + "/"
+		newname = newname[:-1]
+		print(el, "->", newname)
+		os.rename(el, newname)
 else:
+	# maxrename
 	newnames = input("Insert new name (the '#' char will be replaced with crescent numbers):\n")
 	if "#" in newnames:
-		print("<", sys.argv[1], ">")
+		### print("<", sys.argv[1], ">")
 		lista = list(sys.argv[1:])
 		c = 0
 		length = len(str(len(lista))) # numero di cifre da mettere

@@ -42,10 +42,13 @@ restart your session or launch ```source .profile``` and it will be right to be 
 user@user:~$ maxrename /full/path/to/file1 /full/path/to/file2 /full/path/to/file3
 Insert new name (the '#' char will be replaced with crescent numbers):
 your_new_name#.your_extension
+
+
+for other run maxrename -h because i'm too tired to write here the other commands
 ```
 
 and voilà!
 
 ## TODO:
 
-* add ```maxrename -r```  to replace in each filename
+* 
